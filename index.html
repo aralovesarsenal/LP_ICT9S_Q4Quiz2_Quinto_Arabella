@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>analyzer</title>
+
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <style>
+    body {
+      background-color: #fff6fb;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding: 30px;
+    }
+
+    h1 {
+      background-color: #ffd6ec;
+      color: #d63384;
+      padding: 20px;
+      border-radius: 25px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .banner {
+      max-width: 50%;
+      border-radius: 20px;
+      margin-bottom: 25px;
+    }
+
+    .instructions {
+      display: none;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: #ffeef5;
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      margin: 10px;
+    }
+
+    .grade-input {
+      width: 80px;
+      margin: 0 auto;
+      border-radius: 10px;
+      border: 1px solid #f9c3d1;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .btn-analyze {
+      background-color: #ff91b3;
+      color: white;
+      font-weight: 600;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 30px;
+      margin-top: 25px;
+      transition: 0.3s;
+    }
+
+    .btn-analyze:hover {
+      background-color: #ff73a2;
+    }
+
+    .btn-toggle {
+      background-color: #f7cad0;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 20px;
+      font-size: 14px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+
+
+  <img class="banner" src="https://media.discordapp.net/attachments/1278729923011285013/1369136426930671636/wF5wxpOwnNGswAAAABJRU5ErkJggg.png?ex=681ac329&is=681971a9&hm=1cc9c9ce3111abde13e08e736dc5bcab9416fef0fd1c2666ea68b6a9c437056a&=&format=webp&quality=lossless&width=668&height=434" alt="School banner">
+
+  <h1>Analyzer</h1>
+
+  <button class="btn-toggle" onclick="toggleInstructions()">Click for Instructions</button>
+  <p class="instructions" id="instructions">Please enter your grades for each subject below.</p>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-2 card">
+        <h5>Filipino</h5>
+        <input type="number" id="filipino" class="form-control grade-input" placeholder="e.g. 85">
+      </div>
+      <div class="col-md-2 card">
+        <h5>English</h5>
+        <input type="number" id="english" class="form-control grade-input" placeholder="e.g. 90">
+      </div>
+      <div class="col-md-2 card">
+        <h5>Science</h5>
+        <input type="number" id="science" class="form-control grade-input" placeholder="e.g. 88">
+      </div>
+      <div class="col-md-2 card">
+        <h5>Math</h5>
+        <input type="number" id="math" class="form-control grade-input" placeholder="e.g. 93">
+      </div>
+      <div class="col-md-2 card">
+        <h5>Soc. Studies</h5>
+        <input type="number" id="social" class="form-control grade-input" placeholder="e.g. 87">
+      </div>
+    </div>
+
+    <button class="btn-analyze" onclick="getRating()">Get Rating</button>
+  </div>
+
+  <footer>
+    <small>
+      Note: Grading Criteria and Equivalents can vary depending on school or district.<br>
+      Source: <a href="https://obmfairviewsis.orangeapps.ph/ob/elearning/grades" target="_blank">OrangeApps SIS</a>
+    </small>
+  </footer>
+
+  <script>
+    function toggleInstructions() {
+      const instr = document.getElementById("instructions");
+      instr.style.display = instr.style.display === "none" ? "block" : "none";
+    }
+
+    function getRating() {
+      let filipino = Number(document.getElementById("filipino").value);
+      let english = Number(document.getElementById("english").value);
+      let science = Number(document.getElementById("science").value);
+      let math = Number(document.getElementById("math").value);
+      let social = Number(document.getElementById("social").value);
+
+      let average = Math.round((filipino + english + science + math + social) / 5);
+      let rating = "";
+
+      switch (true) {
+        case (average >= 94 && average <= 100):
+          rating = "Excellent";
+          break;
+        case (average >= 87 && average < 94):
+          rating = "Above Satisfactory";
+          break;
+        case (average >= 80 && average < 87):
+          rating = "Satisfactory";
+          break;
+        case (average >= 75 && average < 80):
+          rating = "Needs Improvement";
+          break;
+        case (average >= 70 && average < 75):
+          rating = "Poor";
+          break;
+        default:
+          rating = "Invalid Input";
+      }
+
+      window.alert("Your average is " + average + " - " + rating);
+    }
+  </script>
+
+</body>
+</html>
